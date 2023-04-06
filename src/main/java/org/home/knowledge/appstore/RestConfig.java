@@ -26,7 +26,7 @@ public class RestConfig {
             .info(
                 new Info().title(applicationName + " API")
                           .description(applicationName + " API")
-                          .version("v0.1");
+                          .version("v0.1")
                         //   .license(new License().name("MIT").url("https://opensource.org/licenses/MIT"))
             );
         // @formatter:on
