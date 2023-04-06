@@ -1,11 +1,11 @@
 package org.home.knowledge.appstore;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
 
 /**
  * Rest configuration
@@ -16,15 +16,18 @@ import io.swagger.v3.oas.models.info.License;
 @Configuration
 public class RestConfig {
 
+    @Value("${spring.application.name}")
+    private String applicationName;
+
     @Bean
-    public OpenAPI openAPI() {
+    OpenAPI openAPI() {
         // @formatter:off
         return new OpenAPI()
             .info(
-                new Info().title("Koat API")
-                          .description("Koat API")
-                          .version("v0.1")
-                          .license(new License().name("MIT").url("https://opensource.org/licenses/MIT"))
+                new Info().title(applicationName + " API")
+                          .description(applicationName + " API")
+                          .version("v0.1");
+                        //   .license(new License().name("MIT").url("https://opensource.org/licenses/MIT"))
             );
         // @formatter:on
     }

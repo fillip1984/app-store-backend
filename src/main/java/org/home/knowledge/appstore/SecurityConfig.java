@@ -32,8 +32,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.antMatchers("/", "/status", "/v3/api-docs/**").permitAll();
-                    auth.antMatchers("/h2-console/**", "/swagger-ui/**").hasAnyRole("USER", "ADMIN");
-                    auth.antMatchers("/actuator/**", "/admin/**").hasAnyRole("ADMIN");
+                    auth.antMatchers("/actuator/**", "/admin/**", "/h2-console/**", "/swagger-ui/**").hasAnyRole("ADMIN");
                     auth.anyRequest().authenticated();
                 })
                 .httpBasic(withDefaults())

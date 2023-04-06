@@ -14,9 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AppStoreApplication {
 
-	@Value("${server.servlet.context-path}")
-	private String serverContextPath;
-
 	@Value("${server.port}")
 	private String serverPort;
 
@@ -31,19 +28,9 @@ public class AppStoreApplication {
 	 */
 	@EventListener
 	void onApplicationEvent(ApplicationStartedEvent event) {
-		// Not my favorite solution to a problem I ran into but when I started to use
-		// SampleDataRunner to load sample data this scrolled off the
-		// console defeating the purpose of even outputting points of interest. Until we
-		// can figure out a way to listen for CommandLineRunners to complete and switch
-		// up the event we're listening for I'm just triggering the loadSampleData
-		// function from here
-
-		// TODO: add in a profile for when this gets ran?
-		// event.getApplicationContext().getBean(AdminService.class).loadSampleData();
-
 		try {
 			var address = InetAddress.getLocalHost().getHostName();
-			var addressBaseUrl = "http://" + address + ":" + serverPort + serverContextPath;
+			var addressBaseUrl = "http://" + address + ":" + serverPort;
 
 			log.info("Web server ready and waiting, good luck out there!\n"
 					+ "\n"

@@ -20,7 +20,7 @@ public class PersistenceConfig {
     // and @LastModifiedBy annotated fields can pickup user details when auditing
     // operations such as insert, update, etc
     @Bean
-    public AuditorAware<String> auditorAware() {
+    AuditorAware<String> auditorAware() {
         return new AuditorAwareImpl();
     }
 }
