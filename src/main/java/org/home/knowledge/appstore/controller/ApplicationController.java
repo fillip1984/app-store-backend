@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.home.knowledge.appstore.model.Application;
 import org.home.knowledge.appstore.model.dto.ApplicationSummary;
+import org.home.knowledge.appstore.model.spec.AbstractEntity;
 import org.home.knowledge.appstore.service.ApplicationService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,8 +55,7 @@ public class ApplicationController {
 
         // limit which fields can be edited
         var existingApplication = applicationService.findById(id);
-        existingApplication.setName(application.getName());
-        existingApplication.setDescription(application.getDescription());
+        BeanUtils.copyProperties(application, existingApplication, AbstractEntity.AUDIT_FIELDS);
         return ResponseEntity.ok(applicationService.save(existingApplication));
     }
 

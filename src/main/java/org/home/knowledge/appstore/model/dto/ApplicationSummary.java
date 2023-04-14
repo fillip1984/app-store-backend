@@ -8,4 +8,6 @@ public interface ApplicationSummary extends AbstractSummary {
 
     String getDescription();
 
+    String getRepositoryUrl();
+
 }
